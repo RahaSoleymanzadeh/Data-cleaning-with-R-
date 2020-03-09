@@ -1,0 +1,106 @@
+---
+title: "Variable Types and Special Values"
+author: "Raha"
+output: html_document
+---
+
+vectors have variables of _one_ type
+```{r}
+c(1, 2, "three")
+(1:3) * 2
+(1:4) * c(1, 2)
+(1:4) * (1:3)
+```
+Each element of a vector can be given a name. This can be done by passing named arguments to
+the c() function or later with the names function
+
+```{r}
+x <- c("red", "green", "blue")
+capColor = c(huey = "red", duey = "blue", louie = "green")
+```
+
+
+```{r}
+capColor["louie"]
+names(capColor)[capColor == "blue"]
+x <- c(4, 7, 6, 5, 2, 8)
+I <- x < 6
+J <- x > 7
+x[I | J]
+x[c(TRUE, FALSE)]
+x[c(-1, -2)]
+
+```
+```{r}
+x <- 1:10
+x[c(TRUE, FALSE)] <- 1
+x
+```
+
+A list is a generalization of a vector in that it can contain objects of different types, including
+other lists. 
+```{r}
+L <- list(x = c(1:5), y = c("a", "b", "c"), z = capColor)
+L
+L[[2]]
+L$y
+L[c(1, 3)]
+L[c("x", "y")]
+L[["z"]]
+```
+
+A data.frame is not much more than a list of vectors, possibly of different types, but with
+every vector (now columns) of the same length.
+```{r}
+d <- data.frame(x = 1:10, y = letters[1:10], z = LETTERS[1:10])
+
+d[1]
+d[, 1]
+d[, "x", drop = FALSE]
+d[c("x", "z")]
+d[d$x > 3, "y", drop = FALSE]
+d[2, ]
+```
+
+NA Stands for not available
+```{r}
+NA + 1
+sum(c(NA, 1, 2))
+median(c(NA, 1, 2, 3), na.rm = TRUE)
+length(c(NA, 2, 3, 4))
+3 == NA
+NA == NA
+TRUE | NA
+```
+NULL is special since it has no
+class (its class is NULL) and has length 0 so it does not take up any space in a vector
+
+```{r}
+length(c(1, 2, NULL, 4))
+sum(c(1, 2, NULL, 4))
+x <- NULL
+c(x, 2)
+
+```
+Inf Stands for infinity and only applies to vectors of class numeric. A vector of class integer can
+never be Inf.
+```{r}
+pi/0
+2 * Inf
+Inf - 1e+10
+Inf + Inf
+3 < -Inf
+Inf == Inf
+```
+
+NaN Stands for not a number. The result is unknown, but it is surely not a number.
+```{r}
+NaN + 1
+Inf/Inf
+exp(NaN)
+class(NaN)
+```
+
+
+```{r}
+```
